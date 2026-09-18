@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ConnectSphere - Profile</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        color: #222;
+      }
+
+      /* =========================
+           NAVBAR
+        ========================= */
+
+      .navbar {
+        background: white;
+
+        height: 65px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        padding: 0 7%;
+
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 100;
+      }
+
+      .logo {
+        font-size: 25px;
+
+        font-weight: bold;
+
+        color: #2563eb;
+
+        cursor: pointer;
+      }
+
+      .nav-links {
+        display: flex;
+
+        gap: 12px;
+
+        align-items: center;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+
+        color: #444;
+
+        font-size: 14px;
+
+        font-weight: 600;
+      }
+
+      .home-btn {
+        background: #2563eb;
+
+        color: white !important;
+
+        padding: 9px 17px;
+
+        border-radius: 8px;
+      }
+
+      .home-btn:hover {
+        background: #1d4ed8;
+      }
+
+      .logout-btn {
+        background: #ef4444;
+
+        color: white;
+
+        border: none;
+
+        padding: 9px 17px;
+
+        border-radius: 8px;
+
+        cursor: pointer;
+
+        font-weight: 600;
+      }
+
+      .logout-btn:hover {
+        background: #dc2626;
+      }
+
+      /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+      .container {
+        width: 90%;
+
+        max-width: 800px;
+
+        margin: 30px auto 50px;
+      }
+
+      /* =========================
+           PROFILE CARD
+        ========================= */
+
+      .profile-card {
+        background: white;
+
+        padding: 35px 30px;
+
+        border-radius: 18px;
+
+        text-align: center;
+
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+      }
+
+      /* =========================
+           PROFILE IMAGE
+        ========================= */
+
+      .profile-image {
+        width: 125px;
+
+        height: 125px;
+
+        border-radius: 50%;
+
+        object-fit: cover;
+
+        margin: 0 auto 15px;
+
+        display: block;
+
+        border: 4px solid #dbeafe;
+      }
+
+      .profile-circle {
+        width: 125px;
+
+        height: 125px;
+
+        border-radius: 50%;
+
+        background: #2563eb;
+
+        color: white;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 42px;
+
+        font-weight: bold;
+
+        margin: 0 auto 15px;
+
+        border: 4px solid #dbeafe;
+      }
+
+      .profile-card h2 {
+        font-size: 25px;
+
+        margin-bottom: 5px;
+      }
+
+      .username {
+        color: #777;
+
+        font-size: 15px;
+      }
+
+      .bio {
+        margin: 18px auto;
+
+        max-width: 520px;
+
+        line-height: 1.6;
+
+        color: #555;
+
+        font-size: 15px;
+      }
+
+      /* =========================
+           STATS
+        ========================= */
+
+      .stats {
+        display: flex;
+
+        justify-content: center;
+
+        gap: 70px;
+
+        margin: 28px 0;
+
+        padding: 18px 0;
+
+        border-top: 1px solid #eee;
+
+        border-bottom: 1px solid #eee;
+      }
+
+      .stat {
+        min-width: 90px;
+      }
+
+      .stat-number {
+        font-size: 23px;
+
+        font-weight: bold;
+
+        color: #2563eb;
+      }
+
+      .stat-label {
+        color: #777;
+
+        font-size: 13px;
+
+        margin-top: 4px;
+      }
+
+      /* =========================
+           FOLLOW BUTTON
+        ========================= */
+
+      .follow-btn {
+        background: #2563eb;
+
+        color: white;
+
+        border: none;
+
+        padding: 11px 30px;
+
+        border-radius: 9px;
+
+        cursor: pointer;
+
+        font-size: 15px;
+
+        font-weight: bold;
+      }
+
+      .follow-btn:hover {
+        background: #1d4ed8;
+      }
+
+      .follow-btn.unfollow {
+        background: #64748b;
+      }
+
+      .follow-btn.unfollow:hover {
+        background: #475569;
+      }
+
+      /* =========================
+           EDIT PROFILE
+        ========================= */
+
+      .edit-section {
+        background: white;
+
+        margin-top: 20px;
+
+        padding: 25px;
+
+        border-radius: 18px;
+
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+      }
+
+      .edit-section h3 {
+        font-size: 20px;
+
+        margin-bottom: 20px;
+
+        color: #222;
+      }
+
+      .edit-section label {
+        display: block;
+
+        margin-bottom: 7px;
+
+        font-weight: bold;
+
+        font-size: 14px;
+
+        color: #444;
+      }
+
+      .edit-section input,
+      .edit-section textarea {
+        width: 100%;
+
+        padding: 12px 13px;
+
+        margin-bottom: 16px;
+
+        border: 1px solid #ddd;
+
+        border-radius: 9px;
+
+        outline: none;
+
+        font-size: 14px;
+
+        font-family: Arial, sans-serif;
+      }
+
+      .edit-section input:focus,
+      .edit-section textarea:focus {
+        border-color: #2563eb;
+
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+      }
+
+      .edit-section textarea {
+        min-height: 100px;
+
+        resize: vertical;
+      }
+
+      .save-btn {
+        background: #16a34a;
+
+        color: white;
+
+        border: none;
+
+        padding: 11px 20px;
+
+        border-radius: 8px;
+
+        cursor: pointer;
+
+        font-size: 14px;
+
+        font-weight: bold;
+      }
+
+      .save-btn:hover {
+        background: #15803d;
+      }
+
+      /* =========================
+           LOADING
+        ========================= */
+
+      .loading {
+        text-align: center;
+
+        padding: 40px;
+
+        color: #777;
+      }
+
+      /* =========================
+           MOBILE
+        ========================= */
+
+      @media (max-width: 600px) {
+        .navbar {
+          padding: 0 4%;
+        }
+
+        .logo {
+          font-size: 20px;
+        }
+
+        .nav-links {
+          gap: 7px;
+        }
+
+        .nav-links a,
+        .logout-btn {
+          font-size: 12px;
+
+          padding: 8px 10px;
+        }
+
+        .container {
+          width: 94%;
+
+          margin-top: 20px;
+        }
+
+        .profile-card {
+          padding: 28px 18px;
+        }
+
+        .profile-image,
+        .profile-circle {
+          width: 105px;
+
+          height: 105px;
+        }
+
+        .profile-circle {
+          font-size: 36px;
+        }
+
+        .profile-card h2 {
+          font-size: 22px;
+        }
+
+        .stats {
+          gap: 30px;
+        }
+
+        .edit-section {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+      <div class="logo" onclick="window.location.href = './index.html'">
+        ConnectSphere
+      </div>
+
+      <div class="nav-links">
+        <a href="./index.html" class="home-btn"> Home </a>
+
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </div>
+    </nav>
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <div class="container">
+      <!-- PROFILE -->
+
+      <div id="profileContainer" class="loading">Loading profile...</div>
+
+      <!-- EDIT PROFILE -->
+
+      <div id="editSection" class="edit-section" style="display: none">
+        <h3>✏️ Edit Profile</h3>
+
+        <label for="editName"> Name </label>
+
+        <input type="text" id="editName" placeholder="Your name" />
+
+        <label for="editUsername"> Username </label>
+
+        <input type="text" id="editUsername" placeholder="Username" />
+
+        <label for="editBio"> Bio </label>
+
+        <textarea
+          id="editBio"
+          placeholder="Write something about yourself..."
+        ></textarea>
+
+        <label for="editProfileImage"> Profile Image URL </label>
+
+        <input
+          type="text"
+          id="editProfileImage"
+          placeholder="Profile image URL"
+        />
+
+        <button class="save-btn" id="saveProfileBtn">Save Profile</button>
+      </div>
+    </div>
+
+    <script>
+      /* =========================
+           API
+        ========================= */
+
+      const API_URL = "http://localhost:5000";
+
+      /* =========================
+           LOGIN DATA
+        ========================= */
+
+      const token = localStorage.getItem("token");
+
+      let currentUsername = localStorage.getItem("username");
+
+      /* =========================
+           CHECK LOGIN
+        ========================= */
+
+      if (!token) {
+        window.location.href = "./login.html";
+      }
+
+      /* =========================
+           GET PROFILE USERNAME
+        ========================= */
+
+      const urlParams = new URLSearchParams(window.location.search);
+
+      const profileUsername = urlParams.get("username") || currentUsername;
+
+      /* =========================
+           LOAD PROFILE
+        ========================= */
+
+      async function loadProfile() {
+        try {
+          const response = await fetch(
+            API_URL + "/api/users/" + encodeURIComponent(profileUsername),
+          );
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            document.getElementById("profileContainer").innerHTML = `
+
+                        <div class="profile-card">
+
+                            <h3>
+                                Profile not found.
+                            </h3>
+
+                        </div>
+
+                    `;
+
+            return;
+          }
+
+          const user = data.user;
+
+          /* =========================
+                   CHECK OWN PROFILE
+                ========================= */
+
+          const isOwnProfile = user.username === currentUsername;
+
+          let profileHTML = "";
+
+          /* =========================
+                   PROFILE IMAGE
+                ========================= */
+
+          if (user.profileImage) {
+            profileHTML += `
+
+                        <img
+                            src="${escapeHTML(user.profileImage)}"
+                            class="profile-image"
+                            alt="Profile picture"
+                            onerror="this.style.display='none';"
+                        >
+
+                    `;
+          } else {
+            profileHTML += `
+
+                        <div class="profile-circle">
+
+                            ${(user.name || user.username || "U")
+                              .charAt(0)
+                              .toUpperCase()}
+
+                        </div>
+
+                    `;
+          }
+
+          /* =========================
+                   PROFILE INFORMATION
+                ========================= */
+
+          profileHTML += `
+
+                    <h2>
+
+                        ${escapeHTML(user.name || user.username)}
+
+                    </h2>
+
+
+                    <div class="username">
+
+                        @${escapeHTML(user.username)}
+
+                    </div>
+
+
+                    <div class="bio">
+
+                        ${user.bio ? escapeHTML(user.bio) : "No bio added yet."}
+
+                    </div>
+
+
+                    <div class="stats">
+
+                        <div class="stat">
+
+                            <div class="stat-number">
+
+                                ${user.followers ? user.followers.length : 0}
+
+                            </div>
+
+
+                            <div class="stat-label">
+
+                                Followers
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <div class="stat-number">
+
+                                ${user.following ? user.following.length : 0}
+
+                            </div>
+
+
+                            <div class="stat-label">
+
+                                Following
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+          /* =========================
+                   FOLLOW BUTTON
+                ========================= */
+
+          if (!isOwnProfile) {
+            const currentUserId = localStorage.getItem("userId");
+
+            let alreadyFollowing = false;
+
+            if (user.followers && currentUserId) {
+              alreadyFollowing = user.followers.some(function (id) {
+                if (id && typeof id === "object" && id._id) {
+                  return id._id.toString() === currentUserId;
+                }
+
+                return id.toString() === currentUserId;
+              });
+            }
+
+            profileHTML += `
+
+                        <button
+                            id="followBtn"
+                            class="follow-btn ${
+                              alreadyFollowing ? "unfollow" : ""
+                            }"
+                        >
+
+                            ${alreadyFollowing ? "Unfollow" : "Follow"}
+
+                        </button>
+
+                    `;
+          }
+
+          /* =========================
+                   DISPLAY PROFILE
+                ========================= */
+
+          document.getElementById("profileContainer").innerHTML = `
+
+                    <div class="profile-card">
+
+                        ${profileHTML}
+
+                    </div>
+
+                `;
+
+          /* =========================
+                   EDIT PROFILE
+                ========================= */
+
+          if (isOwnProfile) {
+            document.getElementById("editSection").style.display = "block";
+
+            document.getElementById("editName").value = user.name || "";
+
+            document.getElementById("editUsername").value = user.username || "";
+
+            document.getElementById("editBio").value = user.bio || "";
+
+            document.getElementById("editProfileImage").value =
+              user.profileImage || "";
+          }
+
+          /* =========================
+                   FOLLOW EVENT
+                ========================= */
+
+          const followBtn = document.getElementById("followBtn");
+
+          if (followBtn) {
+            followBtn.addEventListener("click", async function () {
+              const isFollowing = followBtn.classList.contains("unfollow");
+
+              const action = isFollowing ? "unfollow" : "follow";
+
+              try {
+                const response = await fetch(
+                  API_URL +
+                    "/api/users/" +
+                    encodeURIComponent(profileUsername) +
+                    "/" +
+                    action,
+
+                  {
+                    method: "POST",
+
+                    headers: {
+                      Authorization: "Bearer " + token,
+                    },
+                  },
+                );
+
+                const result = await response.json();
+
+                if (response.ok) {
+                  loadProfile();
+                } else {
+                  alert(result.message || "Unable to update follow status.");
+                }
+              } catch (error) {
+                console.error(error);
+
+                alert("Unable to connect to server.");
+              }
+            });
+          }
+        } catch (error) {
+          console.error(error);
+
+          document.getElementById("profileContainer").innerHTML = `
+
+                    <div class="profile-card">
+
+                        <h3>
+
+                            Unable to load profile.
+
+                        </h3>
+
+                    </div>
+
+                `;
+        }
+      }
+
+      /* =========================
+           SAVE PROFILE
+        ========================= */
+
+      document
+        .getElementById("saveProfileBtn")
+        .addEventListener("click", async function () {
+          const name = document.getElementById("editName").value.trim();
+
+          const username = document.getElementById("editUsername").value.trim();
+
+          const bio = document.getElementById("editBio").value.trim();
+
+          const profileImage = document
+            .getElementById("editProfileImage")
+            .value.trim();
+
+          if (!name) {
+            alert("Name cannot be empty.");
+
+            return;
+          }
+
+          if (!username) {
+            alert("Username cannot be empty.");
+
+            return;
+          }
+
+          const usernamePattern = /^[a-zA-Z0-9_]+$/;
+
+          if (!usernamePattern.test(username)) {
+            alert("Username can contain only letters, numbers and underscore.");
+
+            return;
+          }
+
+          try {
+            const response = await fetch(
+              API_URL + "/api/users/" + encodeURIComponent(currentUsername),
+
+              {
+                method: "PUT",
+
+                headers: {
+                  "Content-Type": "application/json",
+
+                  Authorization: "Bearer " + token,
+                },
+
+                body: JSON.stringify({
+                  name: name,
+
+                  username: username,
+
+                  bio: bio,
+
+                  profileImage: profileImage,
+                }),
+              },
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+              const updatedUser = data.user;
+
+              localStorage.setItem("name", updatedUser.name);
+
+              localStorage.setItem("username", updatedUser.username);
+
+              currentUsername = updatedUser.username;
+
+              alert("Profile updated successfully!");
+
+              window.location.href =
+                "./profile.html?username=" +
+                encodeURIComponent(updatedUser.username);
+            } else {
+              alert(data.message || "Unable to update profile.");
+            }
+          } catch (error) {
+            console.error(error);
+
+            alert("Unable to connect to server.");
+          }
+        });
+
+      /* =========================
+           LOGOUT
+        ========================= */
+
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function () {
+          localStorage.removeItem("token");
+
+          localStorage.removeItem("username");
+
+          localStorage.removeItem("name");
+
+          localStorage.removeItem("userId");
+
+          window.location.href = "./login.html";
+        });
+
+      /* =========================
+           ESCAPE HTML
+        ========================= */
+
+      function escapeHTML(value) {
+        if (value === null || value === undefined) {
+          return "";
+        }
+
+        return String(value)
+          .replace(/&/g, "&amp;")
+
+          .replace(/</g, "&lt;")
+
+          .replace(/>/g, "&gt;")
+
+          .replace(/"/g, "&quot;")
+
+          .replace(/'/g, "&#039;");
+      }
+
+      /* =========================
+           START
+        ========================= */
+
+      loadProfile();
+    </script>
+  </body>
+</html>
