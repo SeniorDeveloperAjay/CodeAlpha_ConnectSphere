@@ -53,9 +53,11 @@ app.use(express.json({ limit: "100kb" }));
 // CORS
 // --------------------------------------------------
 
-const allowedOrigins = (
-  process.env.FRONTEND_URL || "http://127.0.0.1:5500,http://localhost:5500"
-)
+const allowedOrigins = [
+  "http://127.0.0.1:5500",
+  "http://localhost:5500",
+  "https://connectsphere-web.onrender.com"
+];
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
