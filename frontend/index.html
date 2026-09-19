@@ -1,580 +1,566 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ConnectSphere - Home</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
 
-        body {
-            background: #f0f2f5;
-            color: #222;
-        }
+      body {
+        background: #f0f2f5;
+        color: #222;
+      }
 
-        /* NAVBAR */
+      /* NAVBAR */
+      .navbar {
+        background: #1877f2;
+        color: white;
+        padding: 12px 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .logo {
+        font-size: 25px;
+        font-weight: bold;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .nav-links a,
+      .logout-btn {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 15px;
+        border: none;
+        background: none;
+      }
+
+      .nav-links a:hover,
+      .logout-btn:hover {
+        text-decoration: underline;
+      }
+
+      /* MAIN */
+      .container {
+        max-width: 800px;
+        margin: 25px auto;
+        padding: 0 15px;
+      }
+
+      .welcome {
+        background: white;
+        padding: 18px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      .welcome h2 {
+        margin-bottom: 5px;
+      }
+
+      /* SEARCH */
+      .search-box {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      .search-row {
+        display: flex;
+        gap: 10px;
+      }
+
+      .search-row input {
+        flex: 1;
+        padding: 11px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        outline: none;
+      }
+
+      .search-row button {
+        padding: 11px 18px;
+        border: none;
+        border-radius: 6px;
+        background: #1877f2;
+        color: white;
+        cursor: pointer;
+      }
+
+      .search-results {
+        margin-top: 12px;
+      }
+
+      .search-user {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+      }
+
+      .search-user:hover {
+        background: #f5f5f5;
+      }
+
+      /* CREATE POST */
+      .create-post {
+        background: white;
+        padding: 18px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      .create-post h3 {
+        margin-bottom: 12px;
+      }
+
+      .create-post textarea {
+        width: 100%;
+        min-height: 90px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 7px;
+        resize: vertical;
+        outline: none;
+      }
+
+      .create-post input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 7px;
+      }
+
+      .post-btn {
+        margin-top: 10px;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        background: #1877f2;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .post-btn:hover {
+        background: #0d65d9;
+      }
+
+      /* POST CARD */
+      .post {
+        background: white;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        padding: 18px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      .post-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      .author {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+      }
+
+      .avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: #1877f2;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .author-name {
+        font-weight: bold;
+      }
+
+      .username {
+        font-size: 13px;
+        color: #777;
+      }
+
+      .post-content {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 12px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      .post-image {
+        width: 100%;
+        max-height: 450px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 12px;
+      }
+
+      /* FOLLOW BUTTON */
+      .follow-btn {
+        border: none;
+        background: #1877f2;
+        color: white;
+        padding: 7px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-left: 10px;
+        flex-shrink: 0;
+      }
+
+      .follow-btn:hover {
+        background: #0d65d9;
+      }
+
+      .follow-btn.unfollow {
+        background: #e4e6eb;
+        color: #222;
+      }
+
+      .follow-btn.unfollow:hover {
+        background: #d8dadf;
+      }
+
+      .follow-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      /* POST ACTIONS */
+      .post-actions {
+        display: flex;
+        gap: 10px;
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+        flex-wrap: wrap;
+      }
+
+      .post-actions button {
+        border: none;
+        background: #f0f2f5;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .post-actions button:hover {
+        background: #e2e5e9;
+      }
+
+      .edit-btn {
+        color: #1877f2;
+      }
+
+      .delete-btn {
+        color: #d93025;
+      }
+
+      /* COMMENTS */
+      .comments {
+        margin-top: 15px;
+        border-top: 1px solid #eee;
+        padding-top: 12px;
+      }
+
+      .comment {
+        background: #f0f2f5;
+        padding: 8px 10px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+      }
+
+      .comment-user {
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .comment-text {
+        font-size: 14px;
+        margin-top: 3px;
+        word-wrap: break-word;
+      }
+
+      .comment-box {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .comment-box input {
+        flex: 1;
+        padding: 9px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      .comment-box button {
+        padding: 9px 13px;
+        border: none;
+        border-radius: 6px;
+        background: #1877f2;
+        color: white;
+        cursor: pointer;
+      }
+
+      .empty {
+        background: white;
+        padding: 25px;
+        text-align: center;
+        border-radius: 10px;
+        color: #777;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 20px;
+        color: #777;
+      }
+
+      /* MOBILE */
+      @media (max-width: 600px) {
         .navbar {
-            background: #1877f2;
-            color: white;
-            padding: 12px 25px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+          padding: 10px 15px;
         }
 
         .logo {
-            font-size: 25px;
-            font-weight: bold;
+          font-size: 21px;
         }
 
         .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+          gap: 8px;
         }
 
         .nav-links a,
         .logout-btn {
-            color: white;
-            text-decoration: none;
-            cursor: pointer;
-            font-size: 15px;
-            border: none;
-            background: none;
+          font-size: 13px;
         }
 
-        .nav-links a:hover,
-        .logout-btn:hover {
-            text-decoration: underline;
-        }
-
-        /* MAIN */
         .container {
-            max-width: 800px;
-            margin: 25px auto;
-            padding: 0 15px;
-        }
-
-        .welcome {
-            background: white;
-            padding: 18px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-        }
-
-        .welcome h2 {
-            margin-bottom: 5px;
-        }
-
-        /* SEARCH */
-        .search-box {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+          margin-top: 15px;
         }
 
         .search-row {
-            display: flex;
-            gap: 10px;
-        }
-
-        .search-row input {
-            flex: 1;
-            padding: 11px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            outline: none;
+          flex-direction: column;
         }
 
         .search-row button {
-            padding: 11px 18px;
-            border: none;
-            border-radius: 6px;
-            background: #1877f2;
-            color: white;
-            cursor: pointer;
-        }
-
-        .search-results {
-            margin-top: 12px;
-        }
-
-        .search-user {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-        }
-
-        .search-user:hover {
-            background: #f5f5f5;
-        }
-
-        /* CREATE POST */
-        .create-post {
-            background: white;
-            padding: 18px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-        }
-
-        .create-post h3 {
-            margin-bottom: 12px;
-        }
-
-        .create-post textarea {
-            width: 100%;
-            min-height: 90px;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            resize: vertical;
-            outline: none;
-        }
-
-        .create-post input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-        }
-
-        .post-btn {
-            margin-top: 10px;
-            padding: 10px 18px;
-            border: none;
-            border-radius: 6px;
-            background: #1877f2;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .post-btn:hover {
-            background: #0d65d9;
-        }
-
-        /* POST CARD */
-        .post {
-            background: white;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            padding: 18px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+          width: 100%;
         }
 
         .post-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
+          align-items: flex-start;
         }
 
-        .author {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
-
-        .avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: #1877f2;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .author-name {
-            font-weight: bold;
-        }
-
-        .username {
-            font-size: 13px;
-            color: #777;
-        }
-
-        .post-content {
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 12px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        .post-image {
-            width: 100%;
-            max-height: 450px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 12px;
-        }
-
-        /* FOLLOW BUTTON */
         .follow-btn {
-            border: none;
-            background: #1877f2;
-            color: white;
-            padding: 7px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-left: 10px;
-            flex-shrink: 0;
+          margin-left: 5px;
         }
+      }
 
-        .follow-btn:hover {
-            background: #0d65d9;
-        }
+      /* FOOTER */
+      .footer {
+        margin-top: 50px;
+        padding: 35px 20px 20px;
+        background: #111827;
+        color: white;
+        text-align: center;
+      }
 
-        .follow-btn.unfollow {
-            background: #e4e6eb;
-            color: #222;
-        }
+      .footer-content {
+        max-width: 1100px;
+        margin: auto;
+      }
 
-        .follow-btn.unfollow:hover {
-            background: #d8dadf;
-        }
+      .footer-content h3 {
+        margin: 0 0 8px;
+        font-size: 26px;
+        font-weight: 700;
+      }
 
-        .follow-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+      .footer-content > p {
+        margin: 0 0 22px;
+        color: #9ca3af;
+        font-size: 15px;
+      }
 
-        /* POST ACTIONS */
-        .post-actions {
-            display: flex;
-            gap: 10px;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-            flex-wrap: wrap;
-        }
+      .footer-bottom {
+        border-top: 1px solid #374151;
+        padding-top: 18px;
+        color: #9ca3af;
+        font-size: 13px;
+      }
 
-        .post-actions button {
-            border: none;
-            background: #f0f2f5;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+      .footer-bottom p {
+        margin: 6px 0;
+      }
 
-        .post-actions button:hover {
-            background: #e2e5e9;
-        }
-
-        .edit-btn {
-            color: #1877f2;
-        }
-
-        .delete-btn {
-            color: #d93025;
-        }
-
-        /* COMMENTS */
-        .comments {
-            margin-top: 15px;
-            border-top: 1px solid #eee;
-            padding-top: 12px;
-        }
-
-        .comment {
-            background: #f0f2f5;
-            padding: 8px 10px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-        }
-
-        .comment-user {
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .comment-text {
-            font-size: 14px;
-            margin-top: 3px;
-            word-wrap: break-word;
-        }
-
-        .comment-box {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .comment-box input {
-            flex: 1;
-            padding: 9px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-
-        .comment-box button {
-            padding: 9px 13px;
-            border: none;
-            border-radius: 6px;
-            background: #1877f2;
-            color: white;
-            cursor: pointer;
-        }
-
-        .empty {
-            background: white;
-            padding: 25px;
-            text-align: center;
-            border-radius: 10px;
-            color: #777;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #777;
-        }
-
-        /* MOBILE */
-        @media (max-width: 600px) {
-            .navbar {
-                padding: 10px 15px;
-            }
-
-            .logo {
-                font-size: 21px;
-            }
-
-            .nav-links {
-                gap: 8px;
-            }
-
-            .nav-links a,
-            .logout-btn {
-                font-size: 13px;
-            }
-
-            .container {
-                margin-top: 15px;
-            }
-
-            .search-row {
-                flex-direction: column;
-            }
-
-            .search-row button {
-                width: 100%;
-            }
-
-            .post-header {
-                align-items: flex-start;
-            }
-
-            .follow-btn {
-                margin-left: 5px;
-            }
-        }
-
-        /* FOOTER */
+      @media (max-width: 600px) {
         .footer {
-            margin-top: 50px;
-            padding: 35px 20px 20px;
-            background: #111827;
-            color: white;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1100px;
-            margin: auto;
+          padding: 30px 15px 18px;
         }
 
         .footer-content h3 {
-            margin: 0 0 8px;
-            font-size: 26px;
-            font-weight: 700;
-        }
-
-        .footer-content > p {
-            margin: 0 0 22px;
-            color: #9ca3af;
-            font-size: 15px;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #374151;
-            padding-top: 18px;
-            color: #9ca3af;
-            font-size: 13px;
+          font-size: 23px;
         }
 
         .footer-bottom p {
-            margin: 6px 0;
+          line-height: 1.5;
         }
-
-        @media (max-width: 600px) {
-            .footer {
-                padding: 30px 15px 18px;
-            }
-
-            .footer-content h3 {
-                font-size: 23px;
-            }
-
-            .footer-bottom p {
-                line-height: 1.5;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <!-- NAVBAR -->
     <nav class="navbar">
-        <div class="logo">ConnectSphere</div>
+      <div class="logo">ConnectSphere</div>
 
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="profile.html">Profile</a>
-            <button class="logout-btn" id="logoutBtn">Logout</button>
-        </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Profile</a>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </div>
     </nav>
 
     <div class="container">
+      <!-- WELCOME -->
+      <div class="welcome">
+        <h2 id="welcomeMessage">Welcome!</h2>
+        <p>Connect with people and share your thoughts.</p>
+      </div>
 
-        <!-- WELCOME -->
-        <div class="welcome">
-            <h2 id="welcomeMessage">Welcome!</h2>
-            <p>Connect with people and share your thoughts.</p>
+      <!-- SEARCH -->
+      <div class="search-box">
+        <h3>Search Users</h3>
+
+        <div class="search-row">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by username..."
+          />
+
+          <button id="searchBtn">Search</button>
         </div>
 
-        <!-- SEARCH -->
-        <div class="search-box">
-            <h3>Search Users</h3>
+        <div id="searchResults" class="search-results"></div>
+      </div>
 
-            <div class="search-row">
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search by username..."
-                />
+      <!-- CREATE POST -->
+      <div class="create-post">
+        <h3>Create a Post</h3>
 
-                <button id="searchBtn">Search</button>
-            </div>
+        <textarea
+          id="postContent"
+          placeholder="What's on your mind?"
+        ></textarea>
 
-            <div id="searchResults" class="search-results"></div>
-        </div>
+        <input type="text" id="postImage" placeholder="Image URL (optional)" />
 
-        <!-- CREATE POST -->
-        <div class="create-post">
-            <h3>Create a Post</h3>
+        <button class="post-btn" id="createPostBtn">Post</button>
+      </div>
 
-            <textarea
-                id="postContent"
-                placeholder="What's on your mind?"
-            ></textarea>
-
-            <input
-                type="text"
-                id="postImage"
-                placeholder="Image URL (optional)"
-            />
-
-            <button class="post-btn" id="createPostBtn">Post</button>
-        </div>
-
-        <!-- POSTS -->
-        <div id="postsContainer">
-            <div class="loading">Loading posts...</div>
-        </div>
-
+      <!-- POSTS -->
+      <div id="postsContainer">
+        <div class="loading">Loading posts...</div>
+      </div>
     </div>
 
     <script>
+      const API_URL = "https://connectsphere-7126.onrender.com";
 
-        const API_URL = "https://connectsphere-7126.onrender.com";
+      const token = localStorage.getItem("token");
+      const currentUser = JSON.parse(localStorage.getItem("user") || "null");
 
-        const token = localStorage.getItem("token");
-        const currentUser = JSON.parse(
-            localStorage.getItem("user") || "null"
-        );
-
-        /* =========================
+      /* =========================
            LOGIN CHECK
         ========================= */
 
-        if (!token || !currentUser) {
-            window.location.href = "login.html";
-        }
+      if (!token || !currentUser) {
+        window.location.href = "login.html";
+      }
 
-        /* =========================
+      /* =========================
            WELCOME MESSAGE
         ========================= */
 
-        if (currentUser) {
-            document.getElementById("welcomeMessage").textContent =
-                `Welcome, ${currentUser.name || currentUser.username}!`;
-        }
+      if (currentUser) {
+        document.getElementById("welcomeMessage").textContent =
+          `Welcome, ${currentUser.name || currentUser.username}!`;
+      }
 
-        /* =========================
+      /* =========================
            HELPER FUNCTIONS
         ========================= */
 
-        function escapeHTML(value) {
-
-            if (value === null || value === undefined) {
-                return "";
-            }
-
-            return String(value)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
+      function escapeHTML(value) {
+        if (value === null || value === undefined) {
+          return "";
         }
 
-        function getInitials(name) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
 
-            if (!name) {
-                return "U";
-            }
-
-            return name
-                .split(" ")
-                .map((word) => word.charAt(0))
-                .join("")
-                .substring(0, 2)
-                .toUpperCase();
+      function getInitials(name) {
+        if (!name) {
+          return "U";
         }
 
-        function createAvatar(user) {
+        return name
+          .split(" ")
+          .map((word) => word.charAt(0))
+          .join("")
+          .substring(0, 2)
+          .toUpperCase();
+      }
 
-            if (user && user.profileImage) {
-
-                return `
+      function createAvatar(user) {
+        if (user && user.profileImage) {
+          return `
                     <div class="avatar">
                         <img
                             src="${escapeHTML(user.profileImage)}"
@@ -582,38 +568,29 @@
                         >
                     </div>
                 `;
-            }
+        }
 
-            return `
+        return `
                 <div class="avatar">
                     ${escapeHTML(
-                        getInitials(
-                            user?.name ||
-                            user?.username ||
-                            "User"
-                        )
+                      getInitials(user?.name || user?.username || "User"),
                     )}
                 </div>
             `;
-        }
+      }
 
-        /* =========================
+      /* =========================
            CREATE COMMENT
         ========================= */
 
-        function createComment(comment) {
+      function createComment(comment) {
+        const user = comment.user || {};
 
-            const user = comment.user || {};
-
-            return `
+        return `
                 <div class="comment">
 
                     <div class="comment-user">
-                        ${escapeHTML(
-                            user.name ||
-                            user.username ||
-                            "User"
-                        )}
+                        ${escapeHTML(user.name || user.username || "User")}
                     </div>
 
                     <div class="comment-text">
@@ -622,65 +599,47 @@
 
                 </div>
             `;
-        }
+      }
 
-        /* =========================
+      /* =========================
            CREATE POST CARD
         ========================= */
 
-        function createPostCard(post) {
+      function createPostCard(post) {
+        const author = post.author || {};
 
-            const author = post.author || {};
+        const isOwner =
+          currentUser && String(author._id) === String(currentUser.id);
 
-            const isOwner =
-                currentUser &&
-                String(author._id) ===
-                String(currentUser.id);
+        /*
+         * Check whether current user follows
+         * this post's author.
+         */
+        const isFollowing =
+          currentUser &&
+          Array.isArray(currentUser.following) &&
+          currentUser.following.some((id) => String(id) === String(author._id));
 
-            /*
-             * Check whether current user follows
-             * this post's author.
-             */
-            const isFollowing =
-                currentUser &&
-                Array.isArray(currentUser.following) &&
-                currentUser.following.some(
-                    (id) =>
-                        String(id) ===
-                        String(author._id)
-                );
+        const isLiked =
+          currentUser &&
+          post.likes &&
+          post.likes.some((id) => String(id) === String(currentUser.id));
 
-            const isLiked =
-                currentUser &&
-                post.likes &&
-                post.likes.some(
-                    (id) =>
-                        String(id) ===
-                        String(currentUser.id)
-                );
+        const likeCount = post.likes ? post.likes.length : 0;
 
-            const likeCount =
-                post.likes
-                    ? post.likes.length
-                    : 0;
+        const comments = post.comments || [];
 
-            const comments =
-                post.comments || [];
+        const postElement = document.createElement("div");
 
-            const postElement =
-                document.createElement("div");
+        postElement.className = "post";
 
-            postElement.className = "post";
-
-            postElement.innerHTML = `
+        postElement.innerHTML = `
 
                 <div class="post-header">
 
                     <div
                         class="author"
-                        data-username="${escapeHTML(
-                            author.username || ""
-                        )}"
+                        data-username="${escapeHTML(author.username || "")}"
                     >
 
                         ${createAvatar(author)}
@@ -689,16 +648,12 @@
 
                             <div class="author-name">
                                 ${escapeHTML(
-                                    author.name ||
-                                    author.username ||
-                                    "User"
+                                  author.name || author.username || "User",
                                 )}
                             </div>
 
                             <div class="username">
-                                @${escapeHTML(
-                                    author.username || ""
-                                )}
+                                @${escapeHTML(author.username || "")}
                             </div>
 
                         </div>
@@ -706,26 +661,20 @@
                     </div>
 
                     ${
-                        !isOwner
-                            ? `
+                      !isOwner
+                        ? `
                                 <button
                                     class="follow-btn ${
-                                        isFollowing
-                                            ? "unfollow"
-                                            : ""
+                                      isFollowing ? "unfollow" : ""
                                     }"
                                     data-username="${escapeHTML(
-                                        author.username || ""
+                                      author.username || "",
                                     )}"
                                 >
-                                    ${
-                                        isFollowing
-                                            ? "Unfollow"
-                                            : "Follow"
-                                    }
+                                    ${isFollowing ? "Unfollow" : "Follow"}
                                 </button>
                             `
-                            : ""
+                        : ""
                     }
 
                 </div>
@@ -735,52 +684,42 @@
                 </div>
 
                 ${
-                    post.image
-                        ? `
+                  post.image
+                    ? `
                             <img
                                 class="post-image"
                                 src="${escapeHTML(post.image)}"
                                 alt="Post image"
                             >
                         `
-                        : ""
+                    : ""
                 }
 
                 <div class="post-actions">
 
                     <button
                         class="like-btn"
-                        data-post-id="${escapeHTML(
-                            post._id
-                        )}"
+                        data-post-id="${escapeHTML(post._id)}"
                     >
-                        ${
-                            isLiked
-                                ? "❤️ Unlike"
-                                : "👍 Like"
-                        }
+                        ${isLiked ? "❤️ Unlike" : "👍 Like"}
                         (${likeCount})
                     </button>
 
                     <button
                         class="comment-focus-btn"
-                        data-post-id="${escapeHTML(
-                            post._id
-                        )}"
+                        data-post-id="${escapeHTML(post._id)}"
                     >
                         💬 Comment
                     </button>
 
                     ${
-                        isOwner
-                            ? `
+                      isOwner
+                        ? `
                                 <button
                                     class="edit-btn"
-                                    data-post-id="${escapeHTML(
-                                        post._id
-                                    )}"
+                                    data-post-id="${escapeHTML(post._id)}"
                                     data-post-content="${escapeHTML(
-                                        post.content
+                                      post.content,
                                     )}"
                                 >
                                     ✏️ Edit
@@ -788,14 +727,12 @@
 
                                 <button
                                     class="delete-btn"
-                                    data-post-id="${escapeHTML(
-                                        post._id
-                                    )}"
+                                    data-post-id="${escapeHTML(post._id)}"
                                 >
                                     🗑️ Delete
                                 </button>
                             `
-                            : ""
+                        : ""
                     }
 
                 </div>
@@ -803,11 +740,9 @@
                 <div class="comments">
 
                     ${
-                        comments.length > 0
-                            ? comments
-                                  .map(createComment)
-                                  .join("")
-                            : `
+                      comments.length > 0
+                        ? comments.map(createComment).join("")
+                        : `
                                 <p style="color:#777;">
                                     No comments yet.
                                 </p>
@@ -819,17 +754,13 @@
                         <input
                             type="text"
                             class="comment-input"
-                            data-post-id="${escapeHTML(
-                                post._id
-                            )}"
+                            data-post-id="${escapeHTML(post._id)}"
                             placeholder="Write a comment..."
                         >
 
                         <button
                             class="comment-btn"
-                            data-post-id="${escapeHTML(
-                                post._id
-                            )}"
+                            data-post-id="${escapeHTML(post._id)}"
                         >
                             Send
                         </button>
@@ -839,1022 +770,677 @@
                 </div>
             `;
 
-            /* =========================
+        /* =========================
                EVENT LISTENERS
             ========================= */
 
-            // Open author profile
-            const authorElement =
-                postElement.querySelector(".author");
+        // Open author profile
+        const authorElement = postElement.querySelector(".author");
 
-            authorElement.addEventListener(
-                "click",
-                () => {
+        authorElement.addEventListener("click", () => {
+          const username = authorElement.dataset.username;
 
-                    const username =
-                        authorElement.dataset.username;
+          openProfile(username);
+        });
 
-                    openProfile(username);
-                }
-            );
+        // Follow / Unfollow
+        const followButton = postElement.querySelector(".follow-btn");
 
-            // Follow / Unfollow
-            const followButton =
-                postElement.querySelector(".follow-btn");
+        if (followButton) {
+          followButton.addEventListener("click", (event) => {
+            event.stopPropagation();
 
-            if (followButton) {
+            const username = followButton.dataset.username;
 
-                followButton.addEventListener(
-                    "click",
-                    (event) => {
-
-                        event.stopPropagation();
-
-                        const username =
-                            followButton.dataset.username;
-
-                        toggleFollow(
-                            username,
-                            followButton
-                        );
-                    }
-                );
-            }
-
-            // Like / Unlike
-            const likeButton =
-                postElement.querySelector(".like-btn");
-
-            likeButton.addEventListener(
-                "click",
-                () => {
-
-                    const postId =
-                        likeButton.dataset.postId;
-
-                    likePost(
-                        postId,
-                        likeButton
-                    );
-                }
-            );
-
-            // Comment focus
-            const commentFocusButton =
-                postElement.querySelector(
-                    ".comment-focus-btn"
-                );
-
-            commentFocusButton.addEventListener(
-                "click",
-                () => {
-
-                    const postId =
-                        commentFocusButton.dataset.postId;
-
-                    focusComment(postId);
-                }
-            );
-
-            // Edit
-            const editButton =
-                postElement.querySelector(".edit-btn");
-
-            if (editButton) {
-
-                editButton.addEventListener(
-                    "click",
-                    () => {
-
-                        const postId =
-                            editButton.dataset.postId;
-
-                        const content =
-                            editButton.dataset.postContent;
-
-                        editPost(
-                            postId,
-                            content
-                        );
-                    }
-                );
-            }
-
-            // Delete
-            const deleteButton =
-                postElement.querySelector(".delete-btn");
-
-            if (deleteButton) {
-
-                deleteButton.addEventListener(
-                    "click",
-                    () => {
-
-                        const postId =
-                            deleteButton.dataset.postId;
-
-                        deletePost(postId);
-                    }
-                );
-            }
-
-            // Add comment
-            const commentButton =
-                postElement.querySelector(".comment-btn");
-
-            commentButton.addEventListener(
-                "click",
-                () => {
-
-                    const postId =
-                        commentButton.dataset.postId;
-
-                    const input =
-                        postElement.querySelector(
-                            `.comment-input[data-post-id="${postId}"]`
-                        );
-
-                    addComment(
-                        postId,
-                        input
-                    );
-                }
-            );
-
-            // Press Enter to comment
-            const commentInput =
-                postElement.querySelector(
-                    ".comment-input"
-                );
-
-            commentInput.addEventListener(
-                "keydown",
-                (event) => {
-
-                    if (event.key === "Enter") {
-
-                        event.preventDefault();
-
-                        const postId =
-                            commentInput.dataset.postId;
-
-                        addComment(
-                            postId,
-                            commentInput
-                        );
-                    }
-                }
-            );
-
-            return postElement;
+            toggleFollow(username, followButton);
+          });
         }
 
-        /* =========================
+        // Like / Unlike
+        const likeButton = postElement.querySelector(".like-btn");
+
+        likeButton.addEventListener("click", () => {
+          const postId = likeButton.dataset.postId;
+
+          likePost(postId, likeButton);
+        });
+
+        // Comment focus
+        const commentFocusButton =
+          postElement.querySelector(".comment-focus-btn");
+
+        commentFocusButton.addEventListener("click", () => {
+          const postId = commentFocusButton.dataset.postId;
+
+          focusComment(postId);
+        });
+
+        // Edit
+        const editButton = postElement.querySelector(".edit-btn");
+
+        if (editButton) {
+          editButton.addEventListener("click", () => {
+            const postId = editButton.dataset.postId;
+
+            const content = editButton.dataset.postContent;
+
+            editPost(postId, content);
+          });
+        }
+
+        // Delete
+        const deleteButton = postElement.querySelector(".delete-btn");
+
+        if (deleteButton) {
+          deleteButton.addEventListener("click", () => {
+            const postId = deleteButton.dataset.postId;
+
+            deletePost(postId);
+          });
+        }
+
+        // Add comment
+        const commentButton = postElement.querySelector(".comment-btn");
+
+        commentButton.addEventListener("click", () => {
+          const postId = commentButton.dataset.postId;
+
+          const input = postElement.querySelector(
+            `.comment-input[data-post-id="${postId}"]`,
+          );
+
+          addComment(postId, input);
+        });
+
+        // Press Enter to comment
+        const commentInput = postElement.querySelector(".comment-input");
+
+        commentInput.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+
+            const postId = commentInput.dataset.postId;
+
+            addComment(postId, commentInput);
+          }
+        });
+
+        return postElement;
+      }
+
+      /* =========================
            LOAD POSTS
         ========================= */
 
-        async function loadPosts() {
+      async function loadPosts() {
+        const container = document.getElementById("postsContainer");
 
-            const container =
-                document.getElementById(
-                    "postsContainer"
-                );
+        try {
+          /*
+           * First get the latest current-user data
+           * from the backend.
+           */
+          const currentUsername = localStorage.getItem("username");
 
-            try {
+          if (currentUsername) {
+            const userResponse = await fetch(
+              `${API_URL}/api/users/${encodeURIComponent(currentUsername)}`,
+              {
+                method: "GET",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              },
+            );
 
-                const response =
-                    await fetch(
-                        `${API_URL}/api/posts`,
-                        {
-                            headers: {
-                                Authorization:
-                                    `Bearer ${token}`,
-                            },
-                        }
-                    );
+            const userData = await userResponse.json();
 
-                const data =
-                    await response.json();
+            if (userResponse.ok && userData.user) {
+              Object.assign(currentUser, userData.user);
 
-                if (!response.ok) {
-
-                    throw new Error(
-                        data.message ||
-                        `Server error: ${response.status}`
-                    );
-                }
-
-                const posts =
-                    data.posts;
-
-                container.innerHTML = "";
-
-                if (
-                    !Array.isArray(posts) ||
-                    posts.length === 0
-                ) {
-
-                    container.innerHTML = `
-                        <div class="empty">
-                            No posts yet.
-                            Be the first to create a post!
-                        </div>
-                    `;
-
-                    return;
-                }
-
-                posts.forEach(
-                    (post) => {
-
-                        container.appendChild(
-                            createPostCard(post)
-                        );
-                    }
-                );
-
-            } catch (error) {
-
-                console.error(
-                    "Load posts error:",
-                    error
-                );
-
-                container.innerHTML = `
-                    <div class="empty">
-                        Unable to load posts.
-                    </div>
-                `;
+              localStorage.setItem("user", JSON.stringify(currentUser));
             }
-        }
+          }
 
-        /* =========================
+          /*
+           * Now load posts.
+           */
+          const response = await fetch(`${API_URL}/api/posts`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || `Server error: ${response.status}`);
+          }
+
+          const posts = data.posts;
+
+          container.innerHTML = "";
+
+          if (!Array.isArray(posts) || posts.length === 0) {
+            container.innerHTML = `
+                <div class="empty">
+                    No posts yet.
+                    Be the first to create a post!
+                </div>
+            `;
+
+            return;
+          }
+
+          posts.forEach((post) => {
+            container.appendChild(createPostCard(post));
+          });
+        } catch (error) {
+          console.error("Load posts error:", error);
+
+          container.innerHTML = `
+            <div class="empty">
+                Unable to load posts.
+            </div>
+        `;
+        }
+      }
+
+      /* =========================
            CREATE POST
         ========================= */
 
-        async function createPost() {
+      async function createPost() {
+        const content = document.getElementById("postContent").value.trim();
 
-            const content =
-                document
-                    .getElementById("postContent")
-                    .value
-                    .trim();
+        const image = document.getElementById("postImage").value.trim();
 
-            const image =
-                document
-                    .getElementById("postImage")
-                    .value
-                    .trim();
+        if (!content) {
+          alert("Please write something before posting.");
 
-            if (!content) {
-
-                alert(
-                    "Please write something before posting."
-                );
-
-                return;
-            }
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/api/posts`,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json",
-
-                                Authorization:
-                                    `Bearer ${token}`,
-                            },
-
-                            body: JSON.stringify({
-                                content,
-                                image,
-                            }),
-                        }
-                    );
-
-                const data =
-                    await response.json();
-
-                if (!response.ok) {
-
-                    alert(
-                        data.message ||
-                        "Failed to create post."
-                    );
-
-                    return;
-                }
-
-                document.getElementById(
-                    "postContent"
-                ).value = "";
-
-                document.getElementById(
-                    "postImage"
-                ).value = "";
-
-                loadPosts();
-
-            } catch (error) {
-
-                console.error(error);
-
-                alert(
-                    "Unable to create post."
-                );
-            }
+          return;
         }
 
-        /* =========================
+        try {
+          const response = await fetch(`${API_URL}/api/posts`, {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+
+              Authorization: `Bearer ${token}`,
+            },
+
+            body: JSON.stringify({
+              content,
+              image,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            alert(data.message || "Failed to create post.");
+
+            return;
+          }
+
+          document.getElementById("postContent").value = "";
+
+          document.getElementById("postImage").value = "";
+
+          loadPosts();
+        } catch (error) {
+          console.error(error);
+
+          alert("Unable to create post.");
+        }
+      }
+
+      /* =========================
            DELETE POST
         ========================= */
 
-        async function deletePost(postId) {
+      async function deletePost(postId) {
+        const confirmed = confirm("Are you sure you want to delete this post?");
 
-            const confirmed =
-                confirm(
-                    "Are you sure you want to delete this post?"
-                );
-
-            if (!confirmed) {
-                return;
-            }
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/api/posts/${postId}`,
-                        {
-                            method: "DELETE",
-
-                            headers: {
-                                Authorization:
-                                    `Bearer ${token}`,
-                            },
-                        }
-                    );
-
-                const data =
-                    await response.json();
-
-                if (!response.ok) {
-
-                    alert(
-                        data.message ||
-                        "Failed to delete post."
-                    );
-
-                    return;
-                }
-
-                loadPosts();
-
-            } catch (error) {
-
-                console.error(error);
-
-                alert(
-                    "Unable to delete post."
-                );
-            }
+        if (!confirmed) {
+          return;
         }
 
-        /* =========================
+        try {
+          const response = await fetch(`${API_URL}/api/posts/${postId}`, {
+            method: "DELETE",
+
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            alert(data.message || "Failed to delete post.");
+
+            return;
+          }
+
+          loadPosts();
+        } catch (error) {
+          console.error(error);
+
+          alert("Unable to delete post.");
+        }
+      }
+
+      /* =========================
            EDIT POST
         ========================= */
 
-        async function editPost(
-            postId,
-            oldContent
-        ) {
+      async function editPost(postId, oldContent) {
+        const newContent = prompt("Edit your post:", oldContent);
 
-            const newContent =
-                prompt(
-                    "Edit your post:",
-                    oldContent
-                );
-
-            if (newContent === null) {
-                return;
-            }
-
-            const content =
-                newContent.trim();
-
-            if (!content) {
-
-                alert(
-                    "Post content cannot be empty."
-                );
-
-                return;
-            }
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/api/posts/${postId}`,
-                        {
-                            method: "PUT",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json",
-
-                                Authorization:
-                                    `Bearer ${token}`,
-                            },
-
-                            body: JSON.stringify({
-                                content,
-                            }),
-                        }
-                    );
-
-                const data =
-                    await response.json();
-
-                if (!response.ok) {
-
-                    alert(
-                        data.message ||
-                        "Failed to edit post."
-                    );
-
-                    return;
-                }
-
-                loadPosts();
-
-            } catch (error) {
-
-                console.error(error);
-
-                alert(
-                    "Unable to edit post."
-                );
-            }
+        if (newContent === null) {
+          return;
         }
 
-        /* =========================
+        const content = newContent.trim();
+
+        if (!content) {
+          alert("Post content cannot be empty.");
+
+          return;
+        }
+
+        try {
+          const response = await fetch(`${API_URL}/api/posts/${postId}`, {
+            method: "PUT",
+
+            headers: {
+              "Content-Type": "application/json",
+
+              Authorization: `Bearer ${token}`,
+            },
+
+            body: JSON.stringify({
+              content,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            alert(data.message || "Failed to edit post.");
+
+            return;
+          }
+
+          loadPosts();
+        } catch (error) {
+          console.error(error);
+
+          alert("Unable to edit post.");
+        }
+      }
+
+      /* =========================
            LIKE / UNLIKE
         ========================= */
 
-        async function likePost(
-            postId,
-            button
-        ) {
+      async function likePost(postId, button) {
+        const isLiked = button.textContent.includes("Unlike");
 
-            const isLiked =
-                button.textContent.includes(
-                    "Unlike"
-                );
+        const endpoint = isLiked
+          ? `${API_URL}/api/posts/${postId}/unlike`
+          : `${API_URL}/api/posts/${postId}/like`;
 
-            const endpoint =
-                isLiked
-                    ? `${API_URL}/api/posts/${postId}/unlike`
-                    : `${API_URL}/api/posts/${postId}/like`;
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
 
-            try {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-                const response =
-                    await fetch(
-                        endpoint,
-                        {
-                            method: "POST",
+          const data = await response.json();
 
-                            headers: {
-                                Authorization:
-                                    `Bearer ${token}`,
-                            },
-                        }
-                    );
+          if (!response.ok) {
+            alert(data.message || "Unable to update like.");
 
-                const data =
-                    await response.json();
+            return;
+          }
 
-                if (!response.ok) {
+          loadPosts();
+        } catch (error) {
+          console.error(error);
 
-                    alert(
-                        data.message ||
-                        "Unable to update like."
-                    );
-
-                    return;
-                }
-
-                loadPosts();
-
-            } catch (error) {
-
-                console.error(error);
-
-                alert(
-                    "Unable to update like."
-                );
-            }
+          alert("Unable to update like.");
         }
+      }
 
-        /* =========================
+      /* =========================
            ADD COMMENT
         ========================= */
 
-        async function addComment(
-            postId,
-            input
-        ) {
+      async function addComment(postId, input) {
+        const text = input.value.trim();
 
-            const text =
-                input.value.trim();
-
-            if (!text) {
-                return;
-            }
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/api/posts/${postId}/comment`,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json",
-
-                                Authorization:
-                                    `Bearer ${token}`,
-                            },
-
-                            body: JSON.stringify({
-                                text,
-                            }),
-                        }
-                    );
-
-                const data =
-                    await response.json();
-
-                if (!response.ok) {
-
-                    alert(
-                        data.message ||
-                        "Failed to add comment."
-                    );
-
-                    return;
-                }
-
-                input.value = "";
-
-                loadPosts();
-
-            } catch (error) {
-
-                console.error(error);
-
-                alert(
-                    "Unable to add comment."
-                );
-            }
+        if (!text) {
+          return;
         }
 
-        /* =========================
+        try {
+          const response = await fetch(
+            `${API_URL}/api/posts/${postId}/comment`,
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json",
+
+                Authorization: `Bearer ${token}`,
+              },
+
+              body: JSON.stringify({
+                text,
+              }),
+            },
+          );
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            alert(data.message || "Failed to add comment.");
+
+            return;
+          }
+
+          input.value = "";
+
+          loadPosts();
+        } catch (error) {
+          console.error(error);
+
+          alert("Unable to add comment.");
+        }
+      }
+
+      /* =========================
            FOCUS COMMENT
         ========================= */
 
-        function focusComment(postId) {
+      function focusComment(postId) {
+        const input = document.querySelector(
+          `.comment-input[data-post-id="${postId}"]`,
+        );
 
-            const input =
-                document.querySelector(
-                    `.comment-input[data-post-id="${postId}"]`
-                );
-
-            if (input) {
-                input.focus();
-            }
+        if (input) {
+          input.focus();
         }
+      }
 
-        /* =========================
+      /* =========================
            OPEN PROFILE
         ========================= */
 
-        function openProfile(username) {
-
-            if (!username) {
-                return;
-            }
-
-            window.location.href =
-                `profile.html?username=${encodeURIComponent(
-                    username
-                )}`;
+      function openProfile(username) {
+        if (!username) {
+          return;
         }
 
-        /* =========================
+        window.location.href = `profile.html?username=${encodeURIComponent(
+          username,
+        )}`;
+      }
+
+      /* =========================
            FOLLOW / UNFOLLOW
         ========================= */
 
-        async function toggleFollow(
-            username,
-            button
-        ) {
+      async function toggleFollow(username, button) {
+        const isFollowing = button.textContent.trim() === "Unfollow";
 
-            const isFollowing =
-                button.textContent.trim() ===
-                "Unfollow";
+        const endpoint = isFollowing
+          ? `${API_URL}/api/users/${encodeURIComponent(username)}/unfollow`
+          : `${API_URL}/api/users/${encodeURIComponent(username)}/follow`;
 
-            const endpoint =
-                isFollowing
-                    ? `${API_URL}/api/users/${encodeURIComponent(username)}/unfollow`
-                    : `${API_URL}/api/users/${encodeURIComponent(username)}/follow`;
+        try {
+          button.disabled = true;
 
-            try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-                button.disabled = true;
+          const data = await response.json();
 
-                const response =
-                    await fetch(
-                        endpoint,
-                        {
-                            method: "POST",
+          if (!response.ok) {
+            alert(data.message || "Unable to update follow status.");
+            return;
+          }
 
-                            headers: {
-                                Authorization:
-                                    `Bearer ${token}`,
-                            },
-                        }
-                    );
+          /*
+           * Backend successfully changed the
+           * follow/unfollow relationship.
+           *
+           * Update the button immediately.
+           */
+          button.textContent = isFollowing ? "Follow" : "Unfollow";
 
-                const data =
-                    await response.json();
+          button.classList.toggle("unfollow", !isFollowing);
 
-                if (!response.ok) {
+          /*
+           * Refresh current user data.
+           * This keeps localStorage synchronized
+           * with MongoDB.
+           */
+          try {
+            const currentUsername = localStorage.getItem("username");
 
-                    alert(
-                        data.message ||
-                        "Unable to update follow status."
-                    );
+            if (currentUsername) {
+              const userResponse = await fetch(
+                `${API_URL}/api/users/${encodeURIComponent(currentUsername)}`,
+                {
+                  method: "GET",
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                },
+              );
 
-                    return;
+              if (userResponse.ok) {
+                const userData = await userResponse.json();
+
+                if (userData.user) {
+                  currentUser = userData.user;
+
+                  localStorage.setItem("user", JSON.stringify(currentUser));
                 }
-
-                /*
-                 * Update the current user's
-                 * following list locally.
-                 *
-                 * The backend response may contain
-                 * updated user data.
-                 */
-                if (data.user) {
-
-                    localStorage.setItem(
-                        "user",
-                        JSON.stringify(data.user)
-                    );
-
-                    currentUser.following =
-                        data.user.following || [];
-                } else {
-
-                    /*
-                     * Fallback in case the backend
-                     * doesn't return the updated user.
-                     */
-                    if (
-                        !Array.isArray(
-                            currentUser.following
-                        )
-                    ) {
-
-                        currentUser.following = [];
-                    }
-
-                    const targetUser =
-                        String(
-                            button.dataset.username
-                        );
-
-                    /*
-                     * We cannot reliably add the ID
-                     * from username alone here, so
-                     * reload posts to get the current
-                     * state from the backend.
-                     */
-                }
-
-                /*
-                 * Change button immediately.
-                 */
-                button.textContent =
-                    isFollowing
-                        ? "Follow"
-                        : "Unfollow";
-
-                button.classList.toggle(
-                    "unfollow",
-                    !isFollowing
-                );
-
-                /*
-                 * Reload the posts so the state is
-                 * synchronized with MongoDB.
-                 */
-                await loadPosts();
-
-            } catch (error) {
-
-                console.error(
-                    "Follow error:",
-                    error
-                );
-
-                alert(
-                    "Unable to update follow status."
-                );
-
-            } finally {
-
-                button.disabled = false;
+              }
             }
-        }
+          } catch (refreshError) {
+            /*
+             * The follow/unfollow operation already
+             * succeeded, so don't show an error just
+             * because refreshing local user data failed.
+             */
+            console.warn("Could not refresh local user data:", refreshError);
+          }
+        } catch (error) {
+          console.error("Follow error:", error);
 
-        /* =========================
+          alert("Unable to update follow status.");
+        } finally {
+          button.disabled = false;
+        }
+      }
+
+      /* =========================
            SEARCH USERS
         ========================= */
 
-        async function searchUsers() {
+      async function searchUsers() {
+        const query = document.getElementById("searchInput").value.trim();
 
-            const query =
-                document
-                    .getElementById("searchInput")
-                    .value
-                    .trim();
+        const results = document.getElementById("searchResults");
 
-            const results =
-                document.getElementById(
-                    "searchResults"
-                );
+        if (!query) {
+          results.innerHTML = "";
 
-            if (!query) {
+          return;
+        }
 
-                results.innerHTML = "";
+        try {
+          /*
+           * Search by USERNAME.
+           *
+           * JWT token is required by
+           * the protected backend route.
+           */
+          const response = await fetch(
+            `${API_URL}/api/users/search/${encodeURIComponent(query)}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          );
 
-                return;
-            }
+          const data = await response.json();
 
-            try {
+          if (!response.ok) {
+            console.error("Search error:", data);
 
-                /*
-                 * Search by USERNAME.
-                 *
-                 * JWT token is required by
-                 * the protected backend route.
-                 */
-                const response =
-                    await fetch(
-                        `${API_URL}/api/users/search/${encodeURIComponent(
-                            query
-                        )}`,
-                        {
-                            headers: {
-                                Authorization:
-                                    `Bearer ${token}`,
-                            },
-                        }
-                    );
-
-                const data =
-                    await response.json();
-
-                if (!response.ok) {
-
-                    console.error(
-                        "Search error:",
-                        data
-                    );
-
-                    results.innerHTML = `
+            results.innerHTML = `
                         <p style="color:#777;">
-                            ${escapeHTML(
-                                data.message ||
-                                "Search failed."
-                            )}
+                            ${escapeHTML(data.message || "Search failed.")}
                         </p>
                     `;
 
-                    return;
-                }
+            return;
+          }
 
-                /*
-                 * IMPORTANT:
-                 * Backend returns:
-                 *
-                 * {
-                 *     users: [...]
-                 * }
-                 *
-                 * So we must use data.users.
-                 */
-                const users =
-                    data.users;
+          /*
+           * IMPORTANT:
+           * Backend returns:
+           *
+           * {
+           *     users: [...]
+           * }
+           *
+           * So we must use data.users.
+           */
+          const users = data.users;
 
-                results.innerHTML = "";
+          results.innerHTML = "";
 
-                if (
-                    !Array.isArray(users) ||
-                    users.length === 0
-                ) {
-
-                    results.innerHTML = `
+          if (!Array.isArray(users) || users.length === 0) {
+            results.innerHTML = `
                         <p style="color:#777;">
                             No users found.
                         </p>
                     `;
 
-                    return;
-                }
+            return;
+          }
 
-                users.forEach(
-                    (user) => {
+          users.forEach((user) => {
+            const userDiv = document.createElement("div");
 
-                        const userDiv =
-                            document.createElement(
-                                "div"
-                            );
+            userDiv.className = "search-user";
 
-                        userDiv.className =
-                            "search-user";
-
-                        userDiv.innerHTML = `
+            userDiv.innerHTML = `
                             <strong>
-                                ${escapeHTML(
-                                    user.name ||
-                                    user.username
-                                )}
+                                ${escapeHTML(user.name || user.username)}
                             </strong>
 
                             <br>
 
                             <small>
-                                @${escapeHTML(
-                                    user.username
-                                )}
+                                @${escapeHTML(user.username)}
                             </small>
                         `;
 
-                        userDiv.addEventListener(
-                            "click",
-                            () => {
+            userDiv.addEventListener("click", () => {
+              openProfile(user.username);
+            });
 
-                                openProfile(
-                                    user.username
-                                );
-                            }
-                        );
+            results.appendChild(userDiv);
+          });
+        } catch (error) {
+          console.error("Search error:", error);
 
-                        results.appendChild(
-                            userDiv
-                        );
-                    }
-                );
-
-            } catch (error) {
-
-                console.error(
-                    "Search error:",
-                    error
-                );
-
-                results.innerHTML = `
+          results.innerHTML = `
                     <p style="color:#777;">
                         Search failed.
                     </p>
                 `;
-            }
         }
+      }
 
-        /* =========================
+      /* =========================
            LOGOUT
         ========================= */
 
-        document
-            .getElementById("logoutBtn")
-            .addEventListener(
-                "click",
-                () => {
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("token");
 
-                    localStorage.removeItem(
-                        "token"
-                    );
+        localStorage.removeItem("user");
 
-                    localStorage.removeItem(
-                        "user"
-                    );
+        localStorage.removeItem("username");
 
-                    localStorage.removeItem(
-                        "username"
-                    );
+        localStorage.removeItem("userId");
 
-                    localStorage.removeItem(
-                        "userId"
-                    );
+        localStorage.removeItem("name");
 
-                    localStorage.removeItem(
-                        "name"
-                    );
+        window.location.href = "login.html";
+      });
 
-                    window.location.href =
-                        "login.html";
-                }
-            );
-
-        /* =========================
+      /* =========================
            BUTTON EVENTS
         ========================= */
 
-        document
-            .getElementById(
-                "createPostBtn"
-            )
-            .addEventListener(
-                "click",
-                createPost
-            );
+      document
+        .getElementById("createPostBtn")
+        .addEventListener("click", createPost);
 
-        document
-            .getElementById(
-                "searchBtn"
-            )
-            .addEventListener(
-                "click",
-                searchUsers
-            );
+      document
+        .getElementById("searchBtn")
+        .addEventListener("click", searchUsers);
 
-        document
-            .getElementById(
-                "searchInput"
-            )
-            .addEventListener(
-                "keydown",
-                (event) => {
+      document
+        .getElementById("searchInput")
+        .addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            searchUsers();
+          }
+        });
 
-                    if (
-                        event.key ===
-                        "Enter"
-                    ) {
-
-                        searchUsers();
-                    }
-                }
-            );
-
-        /* =========================
+      /* =========================
            INITIAL LOAD
         ========================= */
 
-        loadPosts();
-
+      loadPosts();
     </script>
 
     <!-- FOOTER -->
     <footer class="footer">
+      <div class="footer-content">
+        <h3>ConnectSphere</h3>
 
-        <div class="footer-content">
+        <p>Connect. Share. Discover.</p>
 
-            <h3>ConnectSphere</h3>
+        <div class="footer-bottom">
+          <p>
+            Where connections become conversations and moments become memories.
+          </p>
 
-            <p>
-                Connect. Share. Discover.
-            </p>
-
-            <div class="footer-bottom">
-
-                <p>
-                    Where connections become
-                    conversations and moments
-                    become memories.
-                </p>
-
-                <p>
-                    © 2026 ConnectSphere.
-                    All rights reserved.
-                </p>
-
-            </div>
-
+          <p>© 2026 ConnectSphere. All rights reserved.</p>
         </div>
-
+      </div>
     </footer>
-
-</body>
+  </body>
 </html>
