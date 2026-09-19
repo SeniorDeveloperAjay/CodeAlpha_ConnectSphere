@@ -58,9 +58,6 @@ const allowedOrigins = [
   "http://localhost:5500",
   "https://connectsphere-web.onrender.com"
 ];
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
 
 app.use(
   cors({
